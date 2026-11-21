@@ -4,7 +4,8 @@ import { getAllUsers, deleteUser } from "../api/userApi";
 import { toast } from "react-hot-toast";
 import {
     Users, PlusCircle, Pencil, Trash2, Search,
-    Loader2, User, Mail, MapPin, RefreshCw
+    Loader2, Mail, MapPin, RefreshCw, AlertTriangle, X,
+    UserX, SearchX
 } from "lucide-react";
 
 function ConfirmModal({ isOpen, onConfirm, onCancel, userName }) {
@@ -12,14 +13,21 @@ function ConfirmModal({ isOpen, onConfirm, onCancel, userName }) {
     return (
         <div className="modal-overlay" onClick={onCancel}>
             <div className="modal" onClick={(e) => e.stopPropagation()}>
+                <div className="modal-icon-wrap">
+                    <AlertTriangle size={32} className="modal-warn-icon" />
+                </div>
                 <h2 className="modal-title">Delete User?</h2>
                 <p className="modal-body">
                     Are you sure you want to delete <strong>{userName}</strong>?
                     This action cannot be undone.
                 </p>
                 <div className="modal-actions">
-                    <button className="btn-secondary" onClick={onCancel}>Cancel</button>
-                    <button className="btn-danger" onClick={onConfirm}>Yes, Delete</button>
+                    <button className="btn-secondary" onClick={onCancel}>
+                        <X size={16} /> Cancel
+                    </button>
+                    <button className="btn-danger" onClick={onConfirm}>
+                        <Trash2 size={16} /> Yes, Delete
+                    </button>
                 </div>
             </div>
         </div>
@@ -126,7 +134,9 @@ export default function UserList() {
                     onChange={(e) => setSearch(e.target.value)}
                 />
                 {search && (
-                    <button className="clear-search" onClick={() => setSearch("")}>✕</button>
+                    <button className="clear-search" onClick={() => setSearch("")} title="Clear search">
+                        <X size={16} />
+                    </button>
                 )}
             </div>
 
@@ -138,8 +148,11 @@ export default function UserList() {
                 </div>
             ) : filtered.length === 0 ? (
                 <div className="empty-state">
-                    <div className="empty-icon">
-                        {search ? "🔍" : "👥"}
+                    <div className="empty-icon-wrap">
+                        {search
+                            ? <SearchX size={48} strokeWidth={1.5} />
+                            : <UserX size={48} strokeWidth={1.5} />
+                        }
                     </div>
                     <h3>{search ? "No results found" : "No users yet"}</h3>
                     <p>{search ? `No users match "${search}"` : "Get started by adding your first user."}</p>
