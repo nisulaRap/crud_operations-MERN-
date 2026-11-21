@@ -94,7 +94,7 @@ export default function Home() {
                 </h1>
                 <p className="hero-subtitle">
                     A production-ready MERN stack application with complete CRUD operations,
-                    real-time search, form validation, and a clean REST API — all in one place.
+                    real-time search, form validation, and a clean REST API - all in one place.
                 </p>
                 <div className="hero-actions">
                     <Link to="/users" className="hero-btn primary">
@@ -112,7 +112,7 @@ export default function Home() {
                 <div className="section-header">
                     <h2 className="section-title">Available Operations</h2>
                     <p className="section-subtitle">
-                        Every CRUD operation is fully implemented end-to-end — from the UI through the API to the database.
+                        Every CRUD operation is fully implemented end-to-end - from the UI through the API to the database.
                     </p>
                 </div>
                 <div className="ops-grid">
