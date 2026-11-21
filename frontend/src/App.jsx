@@ -1,35 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import UsersPage from "./pages/UsersPage";
+import CreateUser from "./pages/CreateUser";
+import EditUser from "./pages/EditUser";
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+export default function App() {
+    return (
+        <BrowserRouter>
+            <Toaster
+                position="top-right"
+                toastOptions={{
+                    duration: 3500,
+                    style: {
+                        background: "#1e293b",
+                        color: "#f1f5f9",
+                        border: "1px solid #334155",
+                        borderRadius: "12px",
+                        fontSize: "14px",
+                    },
+                    success: { iconTheme: { primary: "#10b981", secondary: "#f1f5f9" } },
+                    error: { iconTheme: { primary: "#ef4444", secondary: "#f1f5f9" } },
+                }}
+            />
+            <Navbar />
+            <main className="main-content">
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/users" element={<UsersPage />} />
+                    <Route path="/users/create" element={<CreateUser />} />
+                    <Route path="/users/edit/:id" element={<EditUser />} />
+                </Routes>
+            </main>
+        </BrowserRouter>
+    );
 }
-
-export default App
